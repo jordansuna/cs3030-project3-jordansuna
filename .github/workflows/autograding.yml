@@ -1,0 +1,259 @@
+name: Autograding Tests
+
+on:
+  push:
+    branches: [ main, develop, feature/** ]
+    paths-ignore:
+      - 'hands_on_exercises/**'
+  pull_request:
+    branches: [ main, develop, feature/** ]
+    paths-ignore:
+      - 'hands_on_exercises/**'
+  workflow_dispatch:
+
+permissions:
+  checks: write
+  actions: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  run-autograding-tests:
+    name: Run Pytest Tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    if: github.actor != 'github-classroom[bot]'
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+          cache-dependency-path: 'requirements.txt'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Check instructor token
+        env:
+          INSTRUCTOR_TESTS_TOKEN: ${{ secrets.INSTRUCTOR_TESTS_TOKEN }}
+        run: ./.github/scripts/check_instructor_token.sh
+
+      - name: Checkout private test repository (project3-instructor-tests)
+        uses: actions/checkout@v5
+        with:
+          repository: CS3030-master/project3-instructor-tests
+          token: ${{ secrets.INSTRUCTOR_TESTS_TOKEN }}
+          path: project3-instructor-tests
+
+      - name: Copy test files and scoring script
+        run: |
+          cp -r project3-instructor-tests/tests ./tests
+          cp project3-instructor-tests/calculate_score.py ./calculate_score.py
+
+      - name: Run pytest tests
+        id: pytest
+        continue-on-error: true
+        run: |
+          pytest tests/ -v --tb=short --junit-xml=test-results.xml 2>&1 | tee pytest-output.txt
+
+          total=$(python3 -c "
+          import xml.etree.ElementTree as ET
+          try:
+              root = ET.parse('test-results.xml').getroot()
+              suites = list(root) if root.tag == 'testsuites' else [root]
+              print(sum(int(s.get('tests', 0)) for s in suites))
+          except Exception:
+              print('0')
+          " 2>/dev/null || echo "0")
+
+          passed=$(python3 -c "
+          import xml.etree.ElementTree as ET
+          try:
+              root = ET.parse('test-results.xml').getroot()
+              suites = list(root) if root.tag == 'testsuites' else [root]
+              t = sum(int(s.get('tests', 0)) for s in suites)
+              f = sum(int(s.get('failures', 0)) for s in suites)
+              e = sum(int(s.get('errors', 0)) for s in suites)
+              print(t - f - e)
+          except Exception:
+              print('0')
+          " 2>/dev/null || echo "0")
+
+          failed=$(python3 -c "
+          import xml.etree.ElementTree as ET
+          try:
+              root = ET.parse('test-results.xml').getroot()
+              suites = list(root) if root.tag == 'testsuites' else [root]
+              print(sum(int(s.get('failures', 0)) + int(s.get('errors', 0)) for s in suites))
+          except Exception:
+              print('0')
+          " 2>/dev/null || echo "0")
+
+          {
+            echo "total=$total"
+            echo "passed=$passed"
+            echo "failed=$failed"
+          } >> "$GITHUB_OUTPUT"
+
+          cat pytest-output.txt
+
+      - name: Calculate score
+        id: score
+        continue-on-error: true
+        run: |
+          python3 calculate_score.py 2>&1 | tee score-output.txt
+          {
+            echo "score_output<<EOF"
+            cat score-output.txt
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Check Git workflow
+        id: git_workflow
+        if: always()
+        run: bash .github/scripts/check_git_workflow.sh
+
+      - name: Create workflow summary
+        if: always()
+        env:
+          GIT_CURRENT_BRANCH: ${{ steps.git_workflow.outputs.current_branch }}
+          GIT_HISTORY_REF: ${{ steps.git_workflow.outputs.history_ref }}
+          GIT_COMMIT_COUNT: ${{ steps.git_workflow.outputs.commit_count }}
+          GIT_FEATURE_BRANCH_COUNT: ${{ steps.git_workflow.outputs.feature_branch_count }}
+          GIT_REQUIRED_BRANCH_COUNT: ${{ steps.git_workflow.outputs.required_branch_count }}
+          GIT_MERGED_REQUIRED_COUNT: ${{ steps.git_workflow.outputs.merged_required_count }}
+          GIT_BRANCH_HISTORY_PRESENT: ${{ steps.git_workflow.outputs.branch_history_present }}
+          GIT_COMMIT_COUNT_TARGET: ${{ steps.git_workflow.outputs.commit_count_target }}
+          GIT_COMMIT_COUNT_MET: ${{ steps.git_workflow.outputs.commit_count_met }}
+          GIT_COMMIT_QUALITY_MET: ${{ steps.git_workflow.outputs.commit_quality_met }}
+          GIT_TASK_CONFIG_LOADER_PRESENT: ${{ steps.git_workflow.outputs.task_config_loader_present }}
+          GIT_TASK_CONFIG_LOADER_MERGED: ${{ steps.git_workflow.outputs.task_config_loader_merged }}
+          GIT_TASK_PIPELINE_PARSER_PRESENT: ${{ steps.git_workflow.outputs.task_pipeline_parser_present }}
+          GIT_TASK_PIPELINE_PARSER_MERGED: ${{ steps.git_workflow.outputs.task_pipeline_parser_merged }}
+          GIT_TASK_METRICS_CALCULATOR_PRESENT: ${{ steps.git_workflow.outputs.task_metrics_calculator_present }}
+          GIT_TASK_METRICS_CALCULATOR_MERGED: ${{ steps.git_workflow.outputs.task_metrics_calculator_merged }}
+          GIT_TASK_ANOMALY_DETECTION_PRESENT: ${{ steps.git_workflow.outputs.task_anomaly_detection_present }}
+          GIT_TASK_ANOMALY_DETECTION_MERGED: ${{ steps.git_workflow.outputs.task_anomaly_detection_merged }}
+          GIT_TASK_REPORT_GENERATION_PRESENT: ${{ steps.git_workflow.outputs.task_report_generation_present }}
+          GIT_TASK_REPORT_GENERATION_MERGED: ${{ steps.git_workflow.outputs.task_report_generation_merged }}
+          GIT_TASK_CLI_INTERFACE_PRESENT: ${{ steps.git_workflow.outputs.task_cli_interface_present }}
+          GIT_TASK_CLI_INTERFACE_MERGED: ${{ steps.git_workflow.outputs.task_cli_interface_merged }}
+          GIT_PRESENT_REQUIRED_BRANCHES: ${{ steps.git_workflow.outputs.present_required_branches }}
+          GIT_MERGED_REQUIRED_BRANCHES: ${{ steps.git_workflow.outputs.merged_required_branches }}
+          GIT_MISSING_REQUIRED_BRANCHES: ${{ steps.git_workflow.outputs.missing_required_branches }}
+          GIT_CONVENTIONAL_COUNT: ${{ steps.git_workflow.outputs.conventional_count }}
+          GIT_BAD_MESSAGE_COUNT: ${{ steps.git_workflow.outputs.bad_message_count }}
+          GIT_LAST_FIVE_MESSAGES: ${{ steps.git_workflow.outputs.last_five_messages }}
+        run: |
+          status_mark() {
+            if [ "$1" = "yes" ]; then
+              echo "✅"
+            else
+              echo "❌"
+            fi
+          }
+
+          # Compute git score (20 pts)
+          git_score=0
+          [ "${GIT_COMMIT_COUNT_MET:-no}" = "yes" ] && git_score=$((git_score + 5))
+          [ "${GIT_COMMIT_QUALITY_MET:-no}" = "yes" ] && git_score=$((git_score + 5))
+          [ "${GIT_REQUIRED_BRANCH_COUNT:-0}" -ge 4 ] 2>/dev/null && git_score=$((git_score + 5))
+          [ "${GIT_MERGED_REQUIRED_COUNT:-0}" -ge 4 ] 2>/dev/null && git_score=$((git_score + 5))
+
+          {
+            echo "## 📊 Autograding Results"
+            echo
+            echo "| Metric | Value |"
+            echo "|--------|-------|"
+            echo "| Total Tests | ${{ steps.pytest.outputs.total }} |"
+            echo "| ✅ Passed | ${{ steps.pytest.outputs.passed }} |"
+            echo "| ❌ Failed | ${{ steps.pytest.outputs.failed }} |"
+            echo
+            echo "⚠️ Automated grading covers the code implementation and git workflow. Code walkthrough and part of code quality remain instructor-reviewed."
+            echo
+            echo "### Automated Breakdown"
+            echo "| Part | Max Points | Description |"
+            echo "|------|-----------|-------------|"
+            echo "| Part 1: Configuration Loader | 15 | JSON parsing, validation, error handling |"
+            echo "| Part 2: Pipeline Data Parser | 15 | Data parsing, date filtering, validation |"
+            echo "| Part 3: Metrics Calculator | 20 | Calculation accuracy, edge cases |"
+            echo "| Part 4: Anomaly Detection | 20 | Detection logic, thresholds, severity |"
+            echo "| Part 5: Report Generation | 20 | Multi-format output, formatting |"
+            echo "| Part 6: Main Function/CLI | 15 | argparse, orchestration, logging |"
+            echo "| **Code Subtotal** | **105** | |"
+            echo "| Git Workflow (automated) | 20 | Branches, commits, message quality |"
+            echo "| Code Walkthrough | 20 | **Manually graded by instructor** |"
+            echo "| **Total** | **145** | |"
+            echo
+            echo "### Score from calculate_score.py"
+            echo '```'
+            printf '%s\n' "${{ steps.score.outputs.score_output }}"
+            echo '```'
+            echo
+            echo "### Git Workflow by Task"
+            echo "| Task | Branch Created | Merged to Main |"
+            echo "|------|----------------|----------------|"
+            echo "| Part 1: Config Loader | $(status_mark "${GIT_TASK_CONFIG_LOADER_PRESENT:-no}") | $(status_mark "${GIT_TASK_CONFIG_LOADER_MERGED:-no}") |"
+            echo "| Part 2: Pipeline Parser | $(status_mark "${GIT_TASK_PIPELINE_PARSER_PRESENT:-no}") | $(status_mark "${GIT_TASK_PIPELINE_PARSER_MERGED:-no}") |"
+            echo "| Part 3: Metrics Calculator | $(status_mark "${GIT_TASK_METRICS_CALCULATOR_PRESENT:-no}") | $(status_mark "${GIT_TASK_METRICS_CALCULATOR_MERGED:-no}") |"
+            echo "| Part 4: Anomaly Detection | $(status_mark "${GIT_TASK_ANOMALY_DETECTION_PRESENT:-no}") | $(status_mark "${GIT_TASK_ANOMALY_DETECTION_MERGED:-no}") |"
+            echo "| Part 5: Report Generation | $(status_mark "${GIT_TASK_REPORT_GENERATION_PRESENT:-no}") | $(status_mark "${GIT_TASK_REPORT_GENERATION_MERGED:-no}") |"
+            echo "| Part 6: CLI Interface | $(status_mark "${GIT_TASK_CLI_INTERFACE_PRESENT:-no}") | $(status_mark "${GIT_TASK_CLI_INTERFACE_MERGED:-no}") |"
+            echo
+            echo "### Git Workflow Requirements"
+            echo "| Requirement | Status | Details |"
+            echo "|-------------|--------|---------|"
+            echo "| Minimum non-merge commits (10+) | $(status_mark "${GIT_COMMIT_COUNT_MET:-no}") | ${GIT_COMMIT_COUNT:-0} / ${GIT_COMMIT_COUNT_TARGET:-10} |"
+            echo "| branch_history.txt present | $(status_mark "${GIT_BRANCH_HISTORY_PRESENT:-no}") | ${GIT_BRANCH_HISTORY_PRESENT:-no} |"
+            echo "| Commit message quality | $(status_mark "${GIT_COMMIT_QUALITY_MET:-no}") | vague messages: ${GIT_BAD_MESSAGE_COUNT:-0} |"
+            echo "| **Git Workflow Score** | | **${git_score} / 20** |"
+            echo
+            echo "### Repository Snapshot"
+            echo "| Check | Result |"
+            echo "|-------|--------|"
+            echo "| Current branch | ${GIT_CURRENT_BRANCH:-unknown} |"
+            echo "| History reference | ${GIT_HISTORY_REF:-unknown} |"
+            echo "| Commits (non-merge) | ${GIT_COMMIT_COUNT:-0} |"
+            echo "| Feature branches found | ${GIT_FEATURE_BRANCH_COUNT:-0} |"
+            echo "| Required branches present | ${GIT_REQUIRED_BRANCH_COUNT:-0} / 6 |"
+            echo "| Required branches merged | ${GIT_MERGED_REQUIRED_COUNT:-0} / 6 |"
+            echo "| Conventional-format commits | ${GIT_CONVENTIONAL_COUNT:-0} / ${GIT_COMMIT_COUNT:-0} |"
+            echo "| Vague commit messages | ${GIT_BAD_MESSAGE_COUNT:-0} |"
+            echo
+            echo "Missing required branches: ${GIT_MISSING_REQUIRED_BRANCHES:-none}"
+            echo
+            echo "⚠️ The Git workflow snapshot is informational and does not replace manual grading."
+            if [ -n "${GIT_LAST_FIVE_MESSAGES:-}" ]; then
+              echo
+              echo "Recent commits:"
+              printf '%s\n' "${GIT_LAST_FIVE_MESSAGES}"
+            fi
+            echo
+            echo "---"
+            echo "*Workflow run: ${{ github.run_number }} | Commit: ${{ github.sha }}*"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: test-results-${{ github.run_number }}
+          path: |
+            pytest-output.txt
+            score-output.txt
+            test-results.xml
+          retention-days: 30
+
+      - name: Warn on incomplete tests
+        if: always() && steps.pytest.outputs.failed != '0'
+        run: |
+          echo "::warning::Tests incomplete: ${{ steps.pytest.outputs.passed }}/${{ steps.pytest.outputs.total }} passed (${{ steps.pytest.outputs.failed }} failed)"

@@ -1,0 +1,34 @@
+
+# =============================================================================
+# Instructor-only files (GitHub Classroom automation)
+# =============================================================================
+# Token files for GitHub API access
+*token*.txt
+instructor_token.txt
+api_token.txt
+
+# Hidden credentials file
+.github_credentials
+
+# Assignment configuration (contains sensitive paths)
+assignment.conf
+
+# Generated batch files
+tools/generated/
+*.batch
+
+# Temporary files from automation scripts
+.temp_*
+temp_*
+
+# IDE and editor files
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
+*~
+
+# GitHub Classroom student repositories (auto-generated)
+student-repos/
+student-repos.txt
+project3-instructor-tests

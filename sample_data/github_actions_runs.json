@@ -1,0 +1,694 @@
+{
+    "workflow_runs": [
+        {
+            "id": 12345,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 342,
+            "timestamp": "2026-02-04T10:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12345.log"
+        },
+        {
+            "id": 12346,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 325,
+            "timestamp": "2026-02-04T08:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12346.log"
+        },
+        {
+            "id": 12347,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 298,
+            "timestamp": "2026-02-04T06:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 142,
+                "failed": 8,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12347.log"
+        },
+        {
+            "id": 12348,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 520,
+            "timestamp": "2026-02-04T04:30:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 85,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12348.log"
+        },
+        {
+            "id": 12349,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 310,
+            "timestamp": "2026-02-03T22:45:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 145,
+                "failed": 5,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12349.log"
+        },
+        {
+            "id": 12350,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 305,
+            "timestamp": "2026-02-03T20:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 140,
+                "failed": 10,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12350.log"
+        },
+        {
+            "id": 12351,
+            "workflow": "integration-tests",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 780,
+            "timestamp": "2026-02-03T18:00:00Z",
+            "test_results": {
+                "total": 320,
+                "passed": 318,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12351.log"
+        },
+        {
+            "id": 12352,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 335,
+            "timestamp": "2026-02-03T16:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12352.log"
+        },
+        {
+            "id": 12353,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 445,
+            "timestamp": "2026-02-03T14:30:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 82,
+                "failed": 3,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12353.log"
+        },
+        {
+            "id": 12354,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 318,
+            "timestamp": "2026-02-03T12:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12354.log"
+        },
+        {
+            "id": 12355,
+            "workflow": "linter",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 180,
+            "timestamp": "2026-02-03T10:45:00Z",
+            "test_results": {
+                "total": 0,
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12355.log"
+        },
+        {
+            "id": 12356,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 340,
+            "timestamp": "2026-02-03T08:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 147,
+                "failed": 3,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12356.log"
+        },
+        {
+            "id": 12357,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 328,
+            "timestamp": "2026-02-03T06:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12357.log"
+        },
+        {
+            "id": 12358,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 410,
+            "timestamp": "2026-02-03T04:00:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 80,
+                "failed": 5,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12358.log"
+        },
+        {
+            "id": 12359,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 355,
+            "timestamp": "2026-02-03T02:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12359.log"
+        },
+        {
+            "id": 12360,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 332,
+            "timestamp": "2026-02-02T22:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12360.log"
+        },
+        {
+            "id": 12361,
+            "workflow": "integration-tests",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 725,
+            "timestamp": "2026-02-02T20:15:00Z",
+            "test_results": {
+                "total": 320,
+                "passed": 320,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12361.log"
+        },
+        {
+            "id": 12362,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 345,
+            "timestamp": "2026-02-02T18:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12362.log"
+        },
+        {
+            "id": 12363,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "failure",
+            "duration_seconds": 390,
+            "timestamp": "2026-02-02T16:30:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 78,
+                "failed": 7,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12363.log"
+        },
+        {
+            "id": 12364,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 315,
+            "timestamp": "2026-02-02T14:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12364.log"
+        },
+        {
+            "id": 12365,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 338,
+            "timestamp": "2026-02-02T12:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 147,
+                "failed": 3,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12365.log"
+        },
+        {
+            "id": 12366,
+            "workflow": "linter",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 175,
+            "timestamp": "2026-02-02T10:30:00Z",
+            "test_results": {
+                "total": 0,
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12366.log"
+        },
+        {
+            "id": 12367,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 350,
+            "timestamp": "2026-02-02T08:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12367.log"
+        },
+        {
+            "id": 12368,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 330,
+            "timestamp": "2026-02-02T06:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12368.log"
+        },
+        {
+            "id": 12369,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 485,
+            "timestamp": "2026-02-02T04:30:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 85,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12369.log"
+        },
+        {
+            "id": 12370,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 322,
+            "timestamp": "2026-02-02T02:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12370.log"
+        },
+        {
+            "id": 12371,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 341,
+            "timestamp": "2026-02-01T22:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12371.log"
+        },
+        {
+            "id": 12372,
+            "workflow": "integration-tests",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 695,
+            "timestamp": "2026-02-01T20:15:00Z",
+            "test_results": {
+                "total": 320,
+                "passed": 319,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12372.log"
+        },
+        {
+            "id": 12373,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 327,
+            "timestamp": "2026-02-01T18:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12373.log"
+        },
+        {
+            "id": 12374,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 510,
+            "timestamp": "2026-02-01T16:00:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 84,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12374.log"
+        },
+        {
+            "id": 12375,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 335,
+            "timestamp": "2026-02-01T14:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12375.log"
+        },
+        {
+            "id": 12376,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 348,
+            "timestamp": "2026-02-01T12:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 147,
+                "failed": 3,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12376.log"
+        },
+        {
+            "id": 12377,
+            "workflow": "linter",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 185,
+            "timestamp": "2026-02-01T10:30:00Z",
+            "test_results": {
+                "total": 0,
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12377.log"
+        },
+        {
+            "id": 12378,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 320,
+            "timestamp": "2026-02-01T08:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12378.log"
+        },
+        {
+            "id": 12379,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 337,
+            "timestamp": "2026-02-01T06:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12379.log"
+        },
+        {
+            "id": 12380,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 495,
+            "timestamp": "2026-02-01T04:30:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 85,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12380.log"
+        },
+        {
+            "id": 12381,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 325,
+            "timestamp": "2026-02-01T02:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12381.log"
+        },
+        {
+            "id": 12382,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 343,
+            "timestamp": "2026-01-31T22:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12382.log"
+        },
+        {
+            "id": 12383,
+            "workflow": "integration-tests",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 710,
+            "timestamp": "2026-01-31T20:15:00Z",
+            "test_results": {
+                "total": 320,
+                "passed": 318,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12383.log"
+        },
+        {
+            "id": 12384,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 330,
+            "timestamp": "2026-01-31T18:30:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 148,
+                "failed": 2,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12384.log"
+        },
+        {
+            "id": 12385,
+            "workflow": "deploy-production",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 505,
+            "timestamp": "2026-01-31T16:00:00Z",
+            "test_results": {
+                "total": 85,
+                "passed": 85,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12385.log"
+        },
+        {
+            "id": 12386,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 318,
+            "timestamp": "2026-01-31T14:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 150,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12386.log"
+        },
+        {
+            "id": 12387,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 352,
+            "timestamp": "2026-01-31T12:00:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 147,
+                "failed": 3,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12387.log"
+        },
+        {
+            "id": 12388,
+            "workflow": "linter",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 190,
+            "timestamp": "2026-01-31T10:30:00Z",
+            "test_results": {
+                "total": 0,
+                "passed": 0,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12388.log"
+        },
+        {
+            "id": 12389,
+            "workflow": "main-ci",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 328,
+            "timestamp": "2026-01-31T08:15:00Z",
+            "test_results": {
+                "total": 150,
+                "passed": 149,
+                "failed": 1,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12389.log"
+        },
+        {
+            "id": 12390,
+            "workflow": "integration-tests",
+            "status": "completed",
+            "conclusion": "success",
+            "duration_seconds": 780,
+            "timestamp": "2026-01-31T06:00:00Z",
+            "test_results": {
+                "total": 320,
+                "passed": 320,
+                "failed": 0,
+                "skipped": 0
+            },
+            "log_file": "sample_data/build_logs/build_12390.log"
+        }
+    ]
+}

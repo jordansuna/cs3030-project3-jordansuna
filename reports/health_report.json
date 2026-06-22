@@ -1,0 +1,146 @@
+{
+  "timestamp": "2026-02-04T11:38:57.038667",
+  "summary": {
+    "total_runs": 46,
+    "success_rate": 0.8695652173913043,
+    "avg_duration_seconds": 386.3478260869565,
+    "test_pass_rate": 0.9883861236802414,
+    "health_score": 32,
+    "status": "NEEDS_ATTENTION"
+  },
+  "metrics": {
+    "total_runs": 46,
+    "successful_runs": 40,
+    "failed_runs": 6,
+    "success_rate": 0.8695652173913043,
+    "avg_duration": 386.3478260869565,
+    "min_duration": 175,
+    "max_duration": 780,
+    "total_tests": 6630,
+    "passed_tests": 6553,
+    "failed_tests": 77,
+    "test_pass_rate": 0.9883861236802414,
+    "workflows": {
+      "main-ci": {
+        "total_runs": 29,
+        "successful_runs": 26,
+        "failed_runs": 3,
+        "success_rate": 0.896551724137931,
+        "avg_duration": 330.7586206896552
+      },
+      "deploy-production": {
+        "total_runs": 8,
+        "successful_runs": 5,
+        "failed_runs": 3,
+        "success_rate": 0.625,
+        "avg_duration": 470.0
+      },
+      "integration-tests": {
+        "total_runs": 5,
+        "successful_runs": 5,
+        "failed_runs": 0,
+        "success_rate": 1.0,
+        "avg_duration": 738.0
+      },
+      "linter": {
+        "total_runs": 4,
+        "successful_runs": 4,
+        "failed_runs": 0,
+        "success_rate": 1.0,
+        "avg_duration": 182.5
+      }
+    }
+  },
+  "anomalies": [
+    {
+      "type": "low_success_rate",
+      "severity": "warning",
+      "value": 0.8695652173913043,
+      "threshold": 0.95,
+      "message": "Success rate 87.0% is below threshold 95.0%",
+      "recommendation": "Review recent failures and address recurring issues. Check logs for common error patterns."
+    },
+    {
+      "type": "slow_build",
+      "severity": "warning",
+      "workflow": "integration-tests",
+      "run_id": 12351,
+      "duration": 780,
+      "threshold": 600,
+      "timestamp": "2026-02-03T18:00:00Z",
+      "message": "Build 12351 (integration-tests) took 780s, exceeding 600s threshold",
+      "recommendation": "Optimize build steps, parallelize tests, or increase CI resources."
+    },
+    {
+      "type": "slow_build",
+      "severity": "warning",
+      "workflow": "integration-tests",
+      "run_id": 12361,
+      "duration": 725,
+      "threshold": 600,
+      "timestamp": "2026-02-02T20:15:00Z",
+      "message": "Build 12361 (integration-tests) took 725s, exceeding 600s threshold",
+      "recommendation": "Optimize build steps, parallelize tests, or increase CI resources."
+    },
+    {
+      "type": "slow_build",
+      "severity": "warning",
+      "workflow": "integration-tests",
+      "run_id": 12372,
+      "duration": 695,
+      "threshold": 600,
+      "timestamp": "2026-02-01T20:15:00Z",
+      "message": "Build 12372 (integration-tests) took 695s, exceeding 600s threshold",
+      "recommendation": "Optimize build steps, parallelize tests, or increase CI resources."
+    },
+    {
+      "type": "slow_build",
+      "severity": "warning",
+      "workflow": "integration-tests",
+      "run_id": 12383,
+      "duration": 710,
+      "threshold": 600,
+      "timestamp": "2026-01-31T20:15:00Z",
+      "message": "Build 12383 (integration-tests) took 710s, exceeding 600s threshold",
+      "recommendation": "Optimize build steps, parallelize tests, or increase CI resources."
+    },
+    {
+      "type": "slow_build",
+      "severity": "warning",
+      "workflow": "integration-tests",
+      "run_id": 12390,
+      "duration": 780,
+      "threshold": 600,
+      "timestamp": "2026-01-31T06:00:00Z",
+      "message": "Build 12390 (integration-tests) took 780s, exceeding 600s threshold",
+      "recommendation": "Optimize build steps, parallelize tests, or increase CI resources."
+    },
+    {
+      "type": "failure_streak",
+      "severity": "critical",
+      "workflow": "main-ci",
+      "streak_length": 3,
+      "threshold": 3,
+      "start_run_id": 12350,
+      "latest_run_id": 12347,
+      "message": "Workflow 'main-ci' has 3 consecutive failures",
+      "recommendation": "Urgent investigation required. Workflow may be fundamentally broken. Consider disabling until fixed."
+    },
+    {
+      "type": "failure_streak",
+      "severity": "critical",
+      "workflow": "deploy-production",
+      "streak_length": 3,
+      "threshold": 3,
+      "start_run_id": 12363,
+      "latest_run_id": 12353,
+      "message": "Workflow 'deploy-production' has 3 consecutive failures",
+      "recommendation": "Urgent investigation required. Workflow may be fundamentally broken. Consider disabling until fixed."
+    }
+  ],
+  "anomaly_count": {
+    "total": 8,
+    "critical": 2,
+    "warning": 6
+  }
+}

@@ -1,0 +1,28 @@
+{
+    "thresholds": {
+        "max_duration_seconds": 600,
+        "min_success_rate": 0.95,
+        "max_failure_streak": 3,
+        "test_pass_rate_threshold": 0.98,
+        "slow_build_multiplier": 1.5
+    },
+    "alert_config": {
+        "enabled": true,
+        "recipients": [
+            "devops-team@company.com",
+            "sre-oncall@company.com"
+        ],
+        "severity_levels": [
+            "critical",
+            "warning"
+        ]
+    },
+    "monitoring": {
+        "lookback_days": 7,
+        "exclude_workflows": [
+            "nightly-tests",
+            "experimental"
+        ],
+        "timezone": "UTC"
+    }
+}
