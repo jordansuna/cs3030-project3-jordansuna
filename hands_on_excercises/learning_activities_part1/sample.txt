@@ -1,0 +1,12 @@
+Miniconda3-latest-Linux-x86_64.sh
+awesome-app
+checkup.sh
+cs3030
+cs3030-master
+git-journey
+git-one
+my-project
+my-projecy
+one.txt
+projects
+yes
